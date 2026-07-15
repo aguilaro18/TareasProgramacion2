@@ -1,3 +1,6 @@
 module.exports = {
-  preset: '@react-native/jest-preset',
+  preset: 'jest-expo',
+  transform: {
+    '^.+\\.(js|ts|tsx)$': 'ts-jest',
+  },
 };
