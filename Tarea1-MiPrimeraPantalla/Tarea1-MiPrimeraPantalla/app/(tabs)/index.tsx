@@ -1,6 +1,15 @@
-import { View, Text, Image, Pressable, StyleSheet, Alert } from "react-native";
+import { View, Text, Image, Pressable, StyleSheet, Alert, Platform } from "react-native";
 
 export default function App() {
+  const mostrarMensaje = () => {
+    const message = "Seré ingeniera";
+    if (Platform.OS === "web") {
+      window.alert(message);
+    } else {
+      Alert.alert(message);
+    }
+  };
+
   return (
     <View style={styles.contenedor}>
       <Image
@@ -10,10 +19,7 @@ export default function App() {
       <Text style={styles.nombre}>Aylin Aguilar</Text>
       <Text style={styles.carrera}>Ingeniería en Sistemas</Text>
       <Text style={styles.carnet}>Carné: 0907-25-6317</Text>
-      <Pressable
-        style={styles.boton}
-        onPress={() => Alert.alert("Seré ingeniera")}
-      >
+      <Pressable style={styles.boton} onPress={mostrarMensaje}>
         <Text style={styles.botonTexto}>Ver proyectos</Text>
       </Pressable>
     </View>
@@ -29,6 +35,5 @@ const styles = StyleSheet.create({
   boton: { marginTop: 20, backgroundColor: "#bfc37a", padding: 12, borderRadius: 8 },
   botonTexto: { color: "white", fontSize: 16 }
 });
-
 
 
