@@ -5,3 +5,5 @@ export default function App() {
   const [mostrarInput, setMostrarInput] = useState<boolean>(false); 
   const [textoNuevaTarea, setNuevaTarea] = useState<string>('');
 }
+
+// Guardar y cocultar el imput 
