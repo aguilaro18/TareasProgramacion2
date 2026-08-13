@@ -6,41 +6,61 @@ export default function App() {
   const [textoNuevaTarea, setNuevaTarea] = useState<string>('');
 }
 
-// Guardar y cocultar el imput 
-const guardarTarea = () => {
-  if (textoNuevaTarea.trim() === '') return;
-  setTareas([...tareas, textoNuevaTarea]);
-  setTextoNuevaTarea('');
-  setMostrarInput(false);
-}; 
+  // Guardar tarea y ocultar el input
+  const guardarTarea = () => {
+    if (textoNuevaTarea.trim() === '') return;
+    setTareas([...tareas, textoNuevaTarea]);
+    setTextoNuevaTarea('');
+    setMostrarInput(false);
+  };
 
-//Confimar y eliminar tarea compatible en wed o telefono
-const confirmarEliminar = (index: number) =>{
-  const mensaje = "Estas seguro que deseas eliminar la tarea?";
+  // Confirmar y eliminar tarea compatible con Web y Móvil
+  const confirmarEliminar = (index: number) => {
+    const mensaje = "¿Está seguro que desea eliminar la tarea?";
 
-if (Platform.OS === 'web'){ 
-  const acepto = window.confirm(mensaje); 
-  if (acepto){
-    const nuevasTareas = tareas.filter ((_, i) => i  !== index);
-    setTareas(nuevasTareas);
-  }
-}else{
-  Alert.alert(
-    "Eliminar tarea", 
-  mensaje,
-  [
-    {text: "Cancelar", style: "cancel"},
-    {
-      text: "Si",
-      onPress: () => {
-        const nuevasTareas = tareas.filter ((_, i) => i  !== index);
+    if (Platform.OS === 'web') {
+      const acepto = window.confirm(mensaje);
+      if (acepto) {
+        const nuevasTareas = tareas.filter((_, i) => i !== index);
         setTareas(nuevasTareas);
-    
       }
+    } else {
+      Alert.alert(
+        "Eliminar tarea",
+        mensaje,
+        [
+          { text: "Cancelar", style: "cancel" },
+          { 
+            text: "Sí", 
+            onPress: () => {
+              const nuevasTareas = tareas.filter((_, i) => i !== index);
+              setTareas(nuevasTareas);
+            } 
+          }
+        ]
+      );
     }
+  };
 
-  ]
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.titulo}>Lista de Tareas</Text>
 
-  );
-}
-};
+      {/* Botón de Nueva tarea */}
+      {!mostrarInput && (
+        <Button title="Nueva tarea" onPress={() => setMostrarInput(true)} />
+      )}
+
+      {/* TextInput y Botón Guardar */}
+      {mostrarInput && (
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Escribe la nueva tarea..."
+            value={textoNuevaTarea}
+            onChangeText={setTextoNuevaTarea}
+          />
+          <Button title="Guardar" onPress={guardarTarea} />
+        </View>
+      )}
+
