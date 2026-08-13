@@ -94,3 +94,56 @@ export default function App() {
   );
 }
 
+const styles = StyleSheet.create({
+   container:{
+    padding : 20,
+     paddingTop:60, 
+     backgroundColor: '#f5f5f5', 
+     flexGrow: 1,
+    },
+    titulo: {
+      fontSize: 24, 
+      fontWeight: 'bold',
+      marginBottom: 20,
+      textAlign: 'center',
+    },
+    inputContainer: {
+      marginVertical: 15,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: '#ccc',
+      padding: 10,
+      borderRadius: 5,
+      backgroundColor: '#fff',
+      marginBottom: 10,
+    },
+    lista: {
+      marginTop: 20,
+    },
+    tareaItem:{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+      padding: 15,
+      borderRadius: 5,
+      marginBottom: 10,
+      borderWidth: 1,
+      borderColor: '#e0e0e0',
+    },
+    textoTarea:{
+      fontSize: 16,
+      flex: 1,
+    },
+    botonEliminar:{
+      backgroundColor:'#ff4d4d',
+      paddingVertical: 6,
+      paddingHorizontal: 12,
+      borderRadius: 4, 
+    },
+    textoBotonEliminar:{
+      color:'#fff',
+      fontWeight: 'bold',
+    },
+} ); 
