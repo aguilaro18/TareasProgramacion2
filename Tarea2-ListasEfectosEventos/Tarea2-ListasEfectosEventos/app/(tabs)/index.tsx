@@ -24,7 +24,7 @@ export default function App() {
     setMostrarInput(false);
   };
 
-  // Confirmar y eliminar tarea compatible con Web y Móvil
+  // Confirmar y eliminar tarea compatible con Web y telefono
   const confirmarEliminar = (index: number) => {
     const mensaje = "¿Está seguro que desea eliminar la tarea?";
 
@@ -36,7 +36,7 @@ export default function App() {
         setTareas(nuevasTareas);
       }
     } else {
-      // Si estás corriendo en un Celular (Android / iOS), usa el Alert nativo
+      // Esto es para poder correrlo ya sea en el telefono o en la web
       Alert.alert(
         "Eliminar tarea",
         mensaje,
@@ -93,7 +93,7 @@ export default function App() {
     </ScrollView>
   );
 }
-
+//Esto es de los estilos
 const styles = StyleSheet.create({
    container:{
     padding : 20,
