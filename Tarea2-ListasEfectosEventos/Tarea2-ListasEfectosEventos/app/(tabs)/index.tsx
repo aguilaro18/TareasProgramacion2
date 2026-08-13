@@ -1,10 +1,20 @@
-import React, { useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity, Alert, Platform} from 'react-native';
-export default function App() { 
+import React, { useState } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  ScrollView, 
+  TextInput, 
+  Button, 
+  TouchableOpacity, 
+  Alert,
+  Platform 
+} from 'react-native';
+
+export default function App() {
   const [tareas, setTareas] = useState<string[]>([]);
-  const [mostrarInput, setMostrarInput] = useState<boolean>(false); 
-  const [textoNuevaTarea, setNuevaTarea] = useState<string>('');
-}
+  const [mostrarInput, setMostrarInput] = useState<boolean>(false);
+  const [textoNuevaTarea, setTextoNuevaTarea] = useState<string>('');
 
   // Guardar tarea y ocultar el input
   const guardarTarea = () => {
@@ -19,12 +29,14 @@ export default function App() {
     const mensaje = "¿Está seguro que desea eliminar la tarea?";
 
     if (Platform.OS === 'web') {
+      // Si estás corriendo en la Web, usa el confirm del navegador
       const acepto = window.confirm(mensaje);
       if (acepto) {
         const nuevasTareas = tareas.filter((_, i) => i !== index);
         setTareas(nuevasTareas);
       }
     } else {
+      // Si estás corriendo en un Celular (Android / iOS), usa el Alert nativo
       Alert.alert(
         "Eliminar tarea",
         mensaje,
@@ -63,4 +75,22 @@ export default function App() {
           <Button title="Guardar" onPress={guardarTarea} />
         </View>
       )}
+
+      {/* Listado de tareas */}
+      <View style={styles.lista}>
+        {tareas.map((tarea, index) => (
+          <View key={index} style={styles.tareaItem}>
+            <Text style={styles.textoTarea}>{tarea}</Text>
+            <TouchableOpacity 
+              style={styles.botonEliminar} 
+              onPress={() => confirmarEliminar(index)}
+            >
+              <Text style={styles.textoBotonEliminar}>Eliminar</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
 
